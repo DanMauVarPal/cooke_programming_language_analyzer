@@ -1,0 +1,22 @@
+f := 15;
+i := 11.00;
+
+read(n);
+
+if n == i :
+    ++i
+else :
+    --i;
+
+t :=f*i%10;
+
+cin >> a;
+
+if t < n:
+    t:=((i+f-f*a)/10);
+    cout<<i
+else:
+    t:=(i+(f-f)*a);
+    cout<<i;
+
+cout << t

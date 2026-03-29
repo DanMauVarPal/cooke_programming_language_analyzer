@@ -1,0 +1,31 @@
+f:= 15;
+i :=11.00;
+_my_really_long_variable_name_:=1;
+
+cin>>n;
+cin>>x;
+cin>>a;
+
+t:=++x*n;
+
+if t<n :
+    if t<=n/2:  ++f
+    else: 		--f
+elif t>n :
+    if t>=n/2 : ++f
+    else : --f
+else :
+    if n==a :
+        f:=((x*100)+(n-3)/2)%2;
+        x:=13
+    else : ++f;
+
+for k in 1..3:
+    _my_really_long_variable_name_:=_my_really_long_variable_name_+k;
+
+if((12+_my_really_long_variable_name_!=13 and x<12) or (x<>13 and _my_really_long_variable_name_>10)):
+    ++x
+else :
+    --x;
+
+cout<<x
