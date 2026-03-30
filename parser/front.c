@@ -41,7 +41,6 @@ int main(int argc, char *argv[])
         printf("Cooke Analyzer :: R11998328\n\n");
         getChar();
         do {
-            lex();
             P();
         } while (nextToken != EOF);
     }

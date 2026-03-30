@@ -37,15 +37,18 @@ void S()
 {
     printf("Enter <stmt>\n");
 
+    lex();
     switch (nextToken) {
         // S ::= V := E Slr
         case IDENT:
-            V();
+            V(); // Consumes IDENT
 
-            if (nextToken == ASSIGNMENT_OP) {
+            lex();
+            if (nextToken == ASSIGNMENT_OP) { // Consumes ASSIGNMENT_OP
                 lex();
                 E();
             }
+            
             break;
 
         // S ::= cin >> V Slr
@@ -119,7 +122,6 @@ void S()
             break;
     }
 
-    lex();
     Slr();
 
     printf("Exit <stmt>\n");
@@ -152,11 +154,10 @@ void Slr()
 {
     printf("Enter <stmt_lr_helper>\n");
 
-    if (nextToken == SEMICOLON) {
-        lex();
+    lex();
+    if (nextToken == SEMICOLON) { // Consumes SEMICOLON
         S();
 
-        lex();
         Slr();
     }
 
@@ -343,12 +344,8 @@ void T()
     /* Parse the first factor */
     F();
 
-    /* As long as the next token is * or /, get the
-    next token and parse the next factor */
-    while (nextToken == MULT_OP || nextToken == DIV_OP) {
-        lex();
-        F();
-    }
+    /* Enter helper function */
+    Tlr();
 
     printf("Exit <term>\n");
 } /* End of function T */
@@ -361,7 +358,12 @@ void Tlr()
 {
     printf("Enter <term_lr_helper>\n");
 
-
+    /* As long as the next token is * or /, get the
+    next token and parse the next factor */
+    while (nextToken == MULT_OP || nextToken == DIV_OP) {
+        lex();
+        F();
+    }
 
     printf("Exit <term_lr_helper>\n");
 } /* End of function Elr */
@@ -374,31 +376,54 @@ void F()
 {
     printf("Enter <factor>\n");
 
-    /* Determine which RHS */
-    if (nextToken == IDENT || nextToken == INT_LITERAL) {
-        lex(); /* Get the next token */
-    } else {
-        /* If the RHS is (<expr>), call lex to pass over the 
-        left parenthesis, call expr, and check for the right 
-        parenthesis */
-        if (nextToken == LEFT_PAREN) {
-            lex(); 
-            E();
+    switch (nextToken) {
+        case RIGHT_PAREN:
+            break;
+        
+        case INT_LITERAL:
+            I();
+            break;
+        
+        case FLOAT_LITERAL:
+            L();
+            break;
 
-            if (nextToken == RIGHT_PAREN) {
-                lex(); 
-            } else { 
-                error();
-            }
-        } /* End of if (nextToken == ... */
-        /* It was not an id, an integer literal, or a left parenthesis */
-        else 
-        { 
-            error(); 
-        }
-    } /* End of else */
+        case IDENT:
+            V();
+            break;
 
-    printf("Exit <factor>\n");;
+        case INC_OP:
+        case DEC_OP:
+            lex();
+            V();
+            break;
+    }
+
+    // /* Determine which RHS */
+    // if (nextToken == IDENT || nextToken == INT_LITERAL) {
+    //     lex(); /* Get the next token */
+    // } else {
+    //     /* If the RHS is (<expr>), call lex to pass over the 
+    //     left parenthesis, call expr, and check for the right 
+    //     parenthesis */
+    //     if (nextToken == LEFT_PAREN) {
+    //         lex(); 
+    //         E();
+
+    //         if (nextToken == RIGHT_PAREN) {
+    //             lex(); 
+    //         } else { 
+    //             error();
+    //         }
+    //     } /* End of if (nextToken == ... */
+    //     /* It was not an id, an integer literal, or a left parenthesis */
+    //     else 
+    //     { 
+    //         error(); 
+    //     }
+    // } /* End of else */
+
+    printf("Exit <factor>\n");
 } /* End of function F */
 
 /* V
@@ -435,7 +460,9 @@ void I()
 {
     printf("Enter <int>\n");
 
+    D();
 
+    Ipd();
 
     printf("Exit <int>\n");
 } /* End of function I */
