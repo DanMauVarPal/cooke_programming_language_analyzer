@@ -140,7 +140,6 @@ void S()
             error();
     }
 
-    lex();
     Slr();
 
     printf("Exit <stmt>\n");
@@ -441,8 +440,6 @@ void F()
             error();
     }
 
-    lex();
-
     // /* Determine which RHS */
     // if (nextToken == IDENT || nextToken == INT_LITERAL) {
     //     lex(); /* Get the next token */
@@ -478,7 +475,7 @@ void V()
 {
     printf("Enter <var_start>\n");
 
-
+    lex();
 
     printf("Exit <var_start>\n");
 } /* End of function V */
@@ -532,7 +529,7 @@ void Ipd()
 {
     printf("Enter <int_pd_helper>\n");
 
-
+    lex();
 
     printf("Exit <int_pd_helper>\n");
 } /* End of function Ipd */
@@ -545,7 +542,7 @@ void L()
 {
     printf("Enter <float>\n");
 
-
+    lex();
 
     printf("Exit <float>\n");
 } /* End of function L */
