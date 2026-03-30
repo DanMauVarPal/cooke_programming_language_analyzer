@@ -120,15 +120,12 @@ void S()
             lex();
             C();
 
-            lex();
             if (nextToken == COLON) { // Consumes COLON
                 lex();
                 S();
 
-                lex();
                 M();
 
-                lex();
                 Spd();
             }
             else error();
@@ -199,7 +196,6 @@ void M()
             lex();
             S();
 
-            lex();
             M();
         }
         else error();
