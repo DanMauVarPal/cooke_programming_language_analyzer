@@ -93,7 +93,7 @@ void S()
             if (nextToken == KEY_IN) { // Consumes KEY_IN
                 E();
 
-                lex():
+                lex();
                 if (nextToken == RANGE_OP) { // Consumes RANGE_OP
                     E();
 
@@ -330,7 +330,6 @@ void Elr()
 
     /* As long as the next token is + or -, get
     the next token and parse the next term */
-    lex();
     if (nextToken == ADD_OP || nextToken == SUB_OP) {
         T();
 
@@ -367,7 +366,6 @@ void Tlr()
 
     /* As long as the next token is * or /, get the
     next token and parse the next factor */
-    lex();
     if (nextToken == MULT_OP || nextToken == DIV_OP || nextToken == MOD_OP) {
         F();
 
@@ -413,7 +411,12 @@ void F()
             lex();
             V();
             break;
+
+        default:
+            error();
     }
+
+    lex();
 
     // /* Determine which RHS */
     // if (nextToken == IDENT || nextToken == INT_LITERAL) {
