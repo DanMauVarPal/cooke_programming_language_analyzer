@@ -42,7 +42,6 @@ void S()
         case IDENT:
             V();
 
-            lex();
             if (nextToken == ASSIGNMENT_OP) { // Consumes ASSIGNMENT_OP
                 lex();
                 E();
@@ -196,7 +195,6 @@ void M()
         lex();
         C();
 
-        lex();
         if (nextToken == COLON) { // Consumes COLON
             lex();
             S();
@@ -220,7 +218,6 @@ void C()
 
     A();
 
-    lex();
     Clr();
 
     printf("Exit <comp_or>\n");
@@ -238,7 +235,6 @@ void Clr()
         lex();
         A();
 
-        lex();
         Clr();
     }
 
@@ -255,7 +251,6 @@ void A()
 
     R();
 
-    lex();
     Alr();
 
     printf("Exit <and_comp>\n");
@@ -273,7 +268,6 @@ void Alr()
         lex();
         R();
 
-        lex();
         Alr();
     }
 
@@ -295,7 +289,6 @@ void R()
     else {
         E();
 
-        lex();
         Rpd();
     }
 
