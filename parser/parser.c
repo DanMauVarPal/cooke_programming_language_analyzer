@@ -338,7 +338,6 @@ void E()
     T();
 
     /* Enter helper function */
-    lex();
     Elr();
 
     printf("Exit <expr>\n");
@@ -358,7 +357,6 @@ void Elr()
         lex();
         T();
 
-        lex();
         Elr();
     }
 
@@ -377,7 +375,6 @@ void T()
     F();
 
     /* Enter helper function */
-    lex();
     Tlr();
 
     printf("Exit <term>\n");
@@ -397,7 +394,6 @@ void Tlr()
         lex();
         F();
 
-        lex();
         Tlr();
     }
 
@@ -412,7 +408,6 @@ void F()
 {
     printf("Enter <factor>\n");
 
-    lex();
     switch (nextToken) {
         case RIGHT_PAREN:
             lex();
