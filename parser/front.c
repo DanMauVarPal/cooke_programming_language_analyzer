@@ -443,6 +443,7 @@ int lex() {
 		case UNKNOWN:
         default:
 			printf("UNKNOWN\n");
+            lex();
     }
     return nextToken;
 } /* End of function lex */
