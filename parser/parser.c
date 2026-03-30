@@ -37,15 +37,16 @@ void S()
 {
     printf("Enter <stmt>\n");
 
-    lex();
     switch (nextToken) {
         // S ::= V := E Slr
         case IDENT:
             V();
 
             lex();
-            if (nextToken == ASSIGNMENT_OP) // Consumes ASSIGNMENT_OP
+            if (nextToken == ASSIGNMENT_OP) { // Consumes ASSIGNMENT_OP
+                lex();
                 E();
+            }
             else
                 error();
             
@@ -65,8 +66,10 @@ void S()
         // S ::= cout << E Slr
         case KEY_COUT:
             lex();
-            if (nextToken == SHIFT_L_OP) // Consumes SHIFT_L_OP
+            if (nextToken == SHIFT_L_OP) { // Consumes SHIFT_L_OP
+                lex();
                 E();
+            }
             else
                 error();
 
@@ -91,15 +94,19 @@ void S()
 
             lex();
             if (nextToken == KEY_IN) { // Consumes KEY_IN
+                lex();
                 E();
 
                 lex();
                 if (nextToken == RANGE_OP) { // Consumes RANGE_OP
+                    lex();
                     E();
 
                     lex();
-                    if (nextToken == COLON) // Consumes COLON
+                    if (nextToken == COLON) { // Consumes COLON
+                        lex();
                         S();
+                    }
                     else
                         error();
                 }
@@ -111,14 +118,18 @@ void S()
         
         // S ::= if C : S M Spd Slr
         case KEY_IF:
+            lex();
             C();
 
             lex();
             if (nextToken == COLON) { // Consumes COLON
+                lex();
                 S();
 
+                lex();
                 M();
 
+                lex();
                 Spd();
             }
             else error();
@@ -129,6 +140,7 @@ void S()
             error();
     }
 
+    lex();
     Slr();
 
     printf("Exit <stmt>\n");
@@ -144,10 +156,11 @@ void Spd()
 
     if (nextToken == KEY_ELSE) { // Consumes KEY_ELSE
         lex();
-        if (nextToken == COLON) // Consumes COLON
+        if (nextToken == COLON) { // Consumes COLON
+            lex();
             S();
-        else
-            error();
+        }
+        else error();
     }
 
     printf("Exit <stmt_pd_helper>\n");
@@ -161,10 +174,11 @@ void Slr()
 {
     printf("Enter <stmt_lr_helper>\n");
 
-    lex();
     if (nextToken == SEMICOLON) { // Consumes SEMICOLON
+        lex();
         S();
 
+        lex();
         Slr();
     }
 
@@ -179,14 +193,16 @@ void M()
 {
     printf("Enter <more_elif>\n");
 
-    lex();
     if (nextToken == KEY_ELIF) { // Consumes KEY_ELIF
+        lex();
         C();
 
         lex();
         if (nextToken == COLON) { // Consumes COLON
+            lex();
             S();
 
+            lex();
             M();
         }
         else error();
@@ -205,6 +221,7 @@ void C()
 
     A();
 
+    lex();
     Clr();
 
     printf("Exit <comp_or>\n");
@@ -218,10 +235,11 @@ void Clr()
 {
     printf("Enter <comp_or_lr_helper>\n");
 
-    lex();
     if (nextToken == BOOLEAN_OR) { // Consumes BOOLEAN_OR
+        lex();
         A();
 
+        lex();
         Clr();
     }
 
@@ -238,6 +256,7 @@ void A()
 
     R();
 
+    lex();
     Alr();
 
     printf("Exit <and_comp>\n");
@@ -251,10 +270,11 @@ void Alr()
 {
     printf("Enter <and_comp_lr_helper>\n");
 
-    lex();
     if (nextToken == BOOLEAN_AND) { // Consumes BOOLEAN_AND
+        lex();
         R();
 
+        lex();
         Alr();
     }
 
@@ -269,12 +289,14 @@ void R()
 {
     printf("Enter <relation>\n");
 
-    lex();
-    if (nextToken == BOOLEAN_NOT) // Consumes BOOLEAN_NOT
+    if (nextToken == BOOLEAN_NOT) {// Consumes BOOLEAN_NOT
+        lex();
         R();
+    }
     else {
         E();
 
+        lex();
         Rpd();
     }
 
@@ -289,14 +311,15 @@ void Rpd()
 {
     printf("Enter <relation_pd_helper>\n");
 
-    lex();
     if (nextToken == LESSER_OP
         || nextToken == GREATER_OP
         || nextToken == EQUAL_OP
         || nextToken == NEQUAL_OP
         || nextToken == LEQUAL_OP
-        || nextToken == GEQUAL_OP)
+        || nextToken == GEQUAL_OP) {
+        lex();
         E();
+    }
     else
         error();
 
@@ -315,6 +338,7 @@ void E()
     T();
 
     /* Enter helper function */
+    lex();
     Elr();
 
     printf("Exit <expr>\n");
@@ -331,8 +355,10 @@ void Elr()
     /* As long as the next token is + or -, get
     the next token and parse the next term */
     if (nextToken == ADD_OP || nextToken == SUB_OP) {
+        lex();
         T();
 
+        lex();
         Elr();
     }
 
@@ -351,6 +377,7 @@ void T()
     F();
 
     /* Enter helper function */
+    lex();
     Tlr();
 
     printf("Exit <term>\n");
@@ -367,8 +394,10 @@ void Tlr()
     /* As long as the next token is * or /, get the
     next token and parse the next factor */
     if (nextToken == MULT_OP || nextToken == DIV_OP || nextToken == MOD_OP) {
+        lex();
         F();
 
+        lex();
         Tlr();
     }
 
@@ -386,6 +415,7 @@ void F()
     lex();
     switch (nextToken) {
         case RIGHT_PAREN:
+            lex();
             E();
 
             lex();

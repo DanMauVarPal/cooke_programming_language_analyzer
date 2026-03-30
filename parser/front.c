@@ -41,6 +41,7 @@ int main(int argc, char *argv[])
         printf("Cooke Analyzer :: R11998328\n\n");
         getChar();
         do {
+            lex();                                                                                                                          
             P();
         } while (nextToken != EOF);
     }
@@ -61,8 +62,8 @@ static int lookup(char ch) {
 				addChar();
                 getChar();
                 nextToken = ASSIGNMENT_OP;
-            }
-	        else nextToken = COLON;
+            } else
+                nextToken = COLON;
             break;
 
 		// Relational and shift operator tokens
@@ -205,7 +206,7 @@ static void getChar() {
         else if (isdigit(nextChar))
             charClass = DIGIT;
 
-		else if (nextChar == '.')
+        else if (nextChar == '.')
             charClass = DOT;
 
         else charClass = UNKNOWN;
@@ -240,31 +241,31 @@ int lex() {
             if (strcmp(lexeme, "or") == 0)
                 nextToken = BOOLEAN_OR;
 
-			else if (strcmp(lexeme, "and") == 0)
+            else if (strcmp(lexeme, "and") == 0)
                 nextToken = BOOLEAN_AND;
 
-			else if (strcmp(lexeme, "not") == 0)
+            else if (strcmp(lexeme, "not") == 0)
                 nextToken = BOOLEAN_NOT;
 
-			else if (strcmp(lexeme, "if") == 0)
+            else if (strcmp(lexeme, "if") == 0)
                 nextToken = KEY_IF;
 
-			else if (strcmp(lexeme, "elif") == 0)
+            else if (strcmp(lexeme, "elif") == 0)
                 nextToken = KEY_ELIF;
 
-			else if (strcmp(lexeme, "else") == 0)
+            else if (strcmp(lexeme, "else") == 0)
                 nextToken = KEY_ELSE;
 
-			else if (strcmp(lexeme, "for") == 0)
+            else if (strcmp(lexeme, "for") == 0)
                 nextToken = KEY_FOR;
 
-			else if (strcmp(lexeme, "in") == 0)
+            else if (strcmp(lexeme, "in") == 0)
                 nextToken = KEY_IN;
 
-			else if (strcmp(lexeme, "cin") == 0)
+            else if (strcmp(lexeme, "cin") == 0)
                 nextToken = KEY_CIN;
 
-			else if (strcmp(lexeme, "cout") == 0)
+            else if (strcmp(lexeme, "cout") == 0)
                 nextToken = KEY_COUT;
 			
             // Identifier token
@@ -279,8 +280,7 @@ int lex() {
                 addChar();
                 getChar();
 				nextToken = RANGE_OP;
-            }
-            else {
+            } else {
                 while (charClass == DIGIT) {
                     addChar();
                     getChar();
