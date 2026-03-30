@@ -147,7 +147,7 @@ void S()
  */
 void Spd()
 {
-    printf("Enter <stmt_pd_helper>\n");
+    printf("Enter <stmt_pd_helper_else>\n");
 
     if (nextToken == KEY_ELSE) { // Consumes KEY_ELSE
         lex();
@@ -158,7 +158,7 @@ void Spd()
         else error();
     }
 
-    printf("Exit <stmt_pd_helper>\n");
+    printf("Exit <stmt_pd_helper_else>\n");
 } /* End of function Spd */
 
 /* Slr
@@ -397,12 +397,12 @@ void F()
     printf("Enter <factor>\n");
 
     switch (nextToken) {
-        case RIGHT_PAREN:
+        case LEFT_PAREN:
             lex();
             E();
 
             lex();
-            if (nextToken != LEFT_PAREN)
+            if (nextToken != RIGHT_PAREN)
                 error();
 
             break;
