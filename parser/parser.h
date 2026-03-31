@@ -26,4 +26,5 @@ void L();
 void D();
 
 extern int nextToken;
+extern char lexeme [100];
 #endif

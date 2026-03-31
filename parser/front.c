@@ -17,10 +17,11 @@
 
 /* Global Variable */
 int nextToken;
+char lexeme [100];
+int lineCount = 0;
 
 /* Local Variables */
 static int charClass;
-static char lexeme [100];
 static char nextChar;
 static int lexLen;
 static FILE *in_fp;
@@ -35,13 +36,21 @@ static void getNonBlank();
 int main(int argc, char *argv[])
 {
     /* Open the input data file and process its contents */
-    if ((in_fp = fopen(argv[1], "r")) == NULL)
+    if (argv[1] == NULL) {
+        printf("ERROR - file wasn't provided\n");
+        return 2;
+    } else if ((in_fp = fopen(argv[1], "r")) == NULL) {
         printf("ERROR - cannot open %s \n", argv[1]);
-    else {
+        return 3;
+    } else {
         printf("Cooke Analyzer :: R11998328\n\n");
         getChar();
         do {
-            lex();                                                                                                                          
+            lex();
+
+            if (nextToken == UNKNOWN)
+                return 1;
+
             P();
         } while (nextToken != EOF);
     }
@@ -218,7 +227,12 @@ static void getChar() {
 /* getNonBlank - a function to call getChar until it returns a non-whitespace 
  * character */
 static void getNonBlank() {
-    while (isspace(nextChar)) getChar();
+    while (isspace(nextChar)) {
+        if (nextChar == '\n')
+            lineCount += 1;
+
+        getChar();
+    }
 }
 
 /*****************************************************/
@@ -334,116 +348,114 @@ int lex() {
 			return nextToken;
     } /* End of switch */
 
-    printf("%s\t", lexeme);
-
 	// Token type check and print
     switch (nextToken) {
         case ASSIGNMENT_OP:
-            printf("ASSIGNMENT_OP\n");
+            printf("%s\tASSIGNMENT_OP\n", lexeme);
 			break;
         case BOOLEAN_OR:
-            printf("BOOLEAN_OR\n");
+            printf("%s\tBOOLEAN_OR\n", lexeme);
             break;
         case BOOLEAN_AND:
-            printf("BOOLEAN_AND\n");
+            printf("%s\tBOOLEAN_AND\n", lexeme);
             break;
         case BOOLEAN_NOT:
-            printf("BOOLEAN_NOT\n");
+            printf("%s\tBOOLEAN_NOT\n", lexeme);
             break;
         case LESSER_OP:
-            printf("LESSER_OP\n");
+            printf("%s\tLESSER_OP\n", lexeme);
             break;
         case GREATER_OP:
-            printf("GREATER_OP\n");
+            printf("%s\tGREATER_OP\n", lexeme);
             break;
         case EQUAL_OP:
-            printf("EQUAL_OP\n");
+            printf("%s\tEQUAL_OP\n", lexeme);
             break;
         case NEQUAL_OP:
-            printf("NEQUAL_OP\n");
+            printf("%s\tNEQUAL_OP\n", lexeme);
             break;
         case LEQUAL_OP:
-            printf("LEQUAL_OP\n");
+            printf("%s\tLEQUAL_OP\n", lexeme);
             break;
         case GEQUAL_OP:
-            printf("GEQUAL_OP\n");
+            printf("%s\tGEQUAL_OP\n", lexeme);
             break;
         case SEMICOLON:
-            printf("SEMICOLON\n");
+            printf("%s\tSEMICOLON\n", lexeme);
             break;
         case COLON:
-            printf("COLON\n");
+            printf("%s\tCOLON\n", lexeme);
             break;
         case LEFT_PAREN:
-            printf("LEFT_PAREN\n");
+            printf("%s\tLEFT_PAREN\n", lexeme);
             break;
         case RIGHT_PAREN:
-			printf("RIGHT_PAREN\n");
+			printf("%s\tRIGHT_PAREN\n", lexeme);
             break;
 		case KEY_IF:
-            printf("KEY_IF\n");
+            printf("%s\tKEY_IF\n", lexeme);
 			break;
 		case KEY_ELIF:
-            printf("KEY_ELIF\n");
+            printf("%s\tKEY_ELIF\n", lexeme);
 			break;
 		case KEY_ELSE:
-            printf("KEY_ELSE\n");
+            printf("%s\tKEY_ELSE\n", lexeme);
 			break;
 		case KEY_FOR:
-            printf("KEY_FOR\n");
+            printf("%s\tKEY_FOR\n", lexeme);
 			break;
 		case KEY_IN:
-            printf("KEY_IN\n");
+            printf("%s\tKEY_IN\n", lexeme);
 			break;
 		case KEY_CIN:
-            printf("KEY_CIN\n");
+            printf("%s\tKEY_CIN\n", lexeme);
 			break;
 		case KEY_COUT:
-            printf("KEY_COUT\n");
+            printf("%s\tKEY_COUT\n", lexeme);
 			break;
 		case SHIFT_R_OP:
-            printf("SHIFT_R_OP\n");
+            printf("%s\tSHIFT_R_OP\n", lexeme);
 			break;
 		case SHIFT_L_OP:
-            printf("SHIFT_L_OP\n");
+            printf("%s\tSHIFT_L_OP\n", lexeme);
 			break;
 		case RANGE_OP:
-            printf("RANGE_OP\n");
+            printf("%s\tRANGE_OP\n", lexeme);
 			break;
 		case ADD_OP:
-            printf("ADD_OP\n");
+            printf("%s\tADD_OP\n", lexeme);
 			break;
 		case SUB_OP:
-            printf("SUB_OP\n");
+            printf("%s\tSUB_OP\n", lexeme);
 			break;
 		case MULT_OP:
-            printf("MULT_OP\n");
+            printf("%s\tMULT_OP\n", lexeme);
 			break;
 		case DIV_OP:
-            printf("DIV_OP\n");
+            printf("%s\tDIV_OP\n", lexeme);
 			break;
 		case MOD_OP:
-            printf("MOD_OP\n");
+            printf("%s\tMOD_OP\n", lexeme);
 			break;
 		case INC_OP:
-            printf("INC_OP\n");
+            printf("%s\tINC_OP\n", lexeme);
 			break;
 		case DEC_OP:
-            printf("DEC_OP\n");
+            printf("%s\tDEC_OP\n", lexeme);
 			break;
         case IDENT:
-            printf("IDENT\n");
+            printf("%s\tIDENT\n", lexeme);
             break;
         case INT_LITERAL:
-            printf("INT_LITERAL\n");
+            printf("%s\tINT_LITERAL\n", lexeme);
             break;
         case FLOAT_LITERAL:
-            printf("FLOAT_LITERAL\n");
+            printf("%s\tFLOAT_LITERAL\n", lexeme);
             break;
 		case UNKNOWN:
         default:
-			printf("UNKNOWN\n");
-            lex();
+			printf("Error encounter on line %d: The next lexeme was %s and the next token was UNKNOWN\n", lineCount);
+            return 1;
     }
-    return nextToken;
+    return 0;
 } /* End of function lex */
