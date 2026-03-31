@@ -46,8 +46,10 @@ void S()
                 lex();
                 E();
             }
-            else
+            else {
                 error();
+                return;
+            }
             
             break;
 
@@ -58,7 +60,10 @@ void S()
                 lex();
                 V();
             }
-            else error();
+            else {
+                error();
+                return;
+            }
 
             break;
 
@@ -69,8 +74,10 @@ void S()
                 lex();
                 E();
             }
-            else
+            else {
                 error();
+                return;
+            }
 
             break;
 
@@ -103,12 +110,19 @@ void S()
                         lex();
                         S();
                     }
-                    else
+                    else {
                         error();
+                        return;
+                    }
+                } {
+                    error();
+                    return;
                 }
-                else error();
             }
-            else error();
+            else {
+                error();
+                return;
+            }
 
             break;
         
@@ -125,12 +139,16 @@ void S()
 
                 Spd();
             }
-            else error();
+            else {
+                error();
+                return;
+            }
 
             break;
         
         default:
             error();
+            return;
     }
 
     Slr();
@@ -152,7 +170,10 @@ void Spd()
             lex();
             S();
         }
-        else error();
+        else {
+            error();
+            return;
+        }
     }
 
     printf("Exit <stmt_pd_helper_else>\n");
@@ -204,7 +225,10 @@ void M()
             /* Enter elif function */
             M();
         }
-        else error();
+        else {
+            error();
+            return;
+        }
     }
 
     printf("Exit <more_elif>\n");
@@ -340,8 +364,10 @@ void Rpd()
         E();
     }
     // Invalid Relation Pairwise-Disjointness Helper
-    else
+    else {
         error();
+        return;
+    }
 
     printf("Exit <relation_pd_helper>\n");
 } /* End of function Rpd */
@@ -450,8 +476,10 @@ void F()
             the next token */
             if (nextToken == RIGHT_PAREN)
                 lex();
-            else
+            else {
                 error();
+                return;
+            }
 
             break;
         
@@ -481,6 +509,7 @@ void F()
         // Invalid factor RHS
         default:
             error();
+            return;
     }
 
     printf("Exit <factor>\n");
