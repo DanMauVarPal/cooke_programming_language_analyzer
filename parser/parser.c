@@ -43,7 +43,8 @@ void S()
             V();
 
             if (nextToken == ASSIGNMENT_OP) { // Consumes ASSIGNMENT_OP
-                lex();
+                if (lex() == UNKNOWN)
+                    return;
                 E();
             }
             else {
@@ -55,9 +56,12 @@ void S()
 
         // S ::= cin >> V Slr
         case KEY_CIN:
-            lex();
+            if (lex() == UNKNOWN)
+                return;
+
             if (nextToken == SHIFT_R_OP) { // Consumes SHIFT_R_OP
-                lex();
+                if (lex() == UNKNOWN)
+                    return;
                 V();
             }
             else {
@@ -69,9 +73,13 @@ void S()
 
         // S ::= cout << E Slr
         case KEY_COUT:
-            lex();
+            if (lex() == UNKNOWN)
+                return;
+
             if (nextToken == SHIFT_L_OP) { // Consumes SHIFT_L_OP
-                lex();
+                if (lex() == UNKNOWN)
+                    return;
+
                 E();
             }
             else {
@@ -83,31 +91,43 @@ void S()
 
         // S ::= ++V Slr
         case INC_OP:
-            lex();
+            if (lex() == UNKNOWN)
+                return;
+
             V();
             break;
 
         // S ::= --V Slr
         case DEC_OP:
-            lex();
+            if (lex() == UNKNOWN)
+                return;
+
             V();
             break;
 
         // S ::= for V in E .. E : S Slr
         case KEY_FOR:
-            lex();
+            if (lex() == UNKNOWN)
+                return;
+
             V();
 
             if (nextToken == KEY_IN) { // Consumes KEY_IN
-                lex();
+                if (lex() == UNKNOWN)
+                    return;
+
                 E();
 
                 if (nextToken == RANGE_OP) { // Consumes RANGE_OP
-                    lex();
+                    if (lex() == UNKNOWN)
+                        return;
+
                     E();
 
                     if (nextToken == COLON) { // Consumes COLON
-                        lex();
+                        if (lex() == UNKNOWN)
+                            return;
+
                         S();
                     }
                     else {
@@ -128,11 +148,15 @@ void S()
         
         // S ::= if C : S M Spd Slr
         case KEY_IF:
-            lex();
+            if (lex() == UNKNOWN)
+                return;
+
             C();
 
             if (nextToken == COLON) { // Consumes COLON
-                lex();
+                if (lex() == UNKNOWN)
+                    return;
+
                 S();
 
                 M();
@@ -165,9 +189,13 @@ void Spd()
     printf("Enter <stmt_pd_helper_else>\n");
 
     if (nextToken == KEY_ELSE) { // Consumes KEY_ELSE
-        lex();
+        if (lex() == UNKNOWN)
+            return;
+
         if (nextToken == COLON) { // Consumes COLON
-            lex();
+            if (lex() == UNKNOWN)
+                return;
+
             S();
         }
         else {
@@ -189,7 +217,9 @@ void Slr()
 
 
     if (nextToken == SEMICOLON) { // Consumes SEMICOLON
-        lex();
+        if (lex() == UNKNOWN)
+            return;
+
         S();
 
         Slr();
@@ -210,7 +240,8 @@ void M()
     the next token, parse the next "or" and check : */
     if (nextToken == KEY_ELIF) {
         /* Get the next token */
-        lex();
+        if (lex() == UNKNOWN)
+            return;
         /* Parse the first "or" */
         C();
 
@@ -218,7 +249,8 @@ void M()
         the next token, parse the next statement and enter "elif" */
         if (nextToken == COLON) {
             /* Get the next token */
-            lex();
+            if (lex() == UNKNOWN)
+                return;
             /* Parse the next statement */
             S();
 
@@ -263,7 +295,8 @@ void Clr()
     the next token, parse the next relation and enter "or" helper */
     if (nextToken == BOOLEAN_OR) {
         /* Get the next token */
-        lex();
+        if (lex() == UNKNOWN)
+            return;
         /* Parse the next and */
         A();
 
@@ -303,7 +336,8 @@ void Alr()
     the next token, parse the next relation and enter "and" helper */
     if (nextToken == BOOLEAN_AND) {
         /* Get the next token */
-        lex();
+        if (lex() == UNKNOWN)
+            return;
         /* Parse the next relation */
         R();
 
@@ -326,7 +360,8 @@ void R()
     the next token and parse the next relation */
     if (nextToken == BOOLEAN_NOT) {
         /* Get the next token */
-        lex();
+        if (lex() == UNKNOWN)
+            return;
         /* Parse the next relation */
         R();
     }
@@ -359,7 +394,8 @@ void Rpd()
         || nextToken == LEQUAL_OP
         || nextToken == GEQUAL_OP) {
         /* Get the next token */
-        lex();
+        if (lex() == UNKNOWN)
+            return;
         /* Parse the next expression */
         E();
     }
@@ -401,7 +437,8 @@ void Elr()
     the next token, parse the next term and enter the expression helper */
     if (nextToken == ADD_OP || nextToken == SUB_OP) {
         /* Get the next token */
-        lex();
+        if (lex() == UNKNOWN)
+            return;
         /* Parse the next term */
         T();
 
@@ -443,7 +480,8 @@ void Tlr()
         || nextToken == DIV_OP
         || nextToken == MOD_OP) {
         /* Get the next token */
-        lex();
+        if (lex() == UNKNOWN)
+            return;
         /* Parse the next factor */
         F();
 
@@ -468,15 +506,17 @@ void F()
         // F ::= (E)
         case LEFT_PAREN:
             /* Get the next token */
-            lex();
+            if (lex() == UNKNOWN)
+                return;
             /* Parse the expression */
             E();
 
             /* As long as the next token is ), get
             the next token */
-            if (nextToken == RIGHT_PAREN)
-                lex();
-            else {
+            if (nextToken == RIGHT_PAREN) {
+                if (lex() == UNKNOWN)
+                    return;
+            } else {
                 error();
                 return;
             }
@@ -502,7 +542,9 @@ void F()
         case INC_OP:
         // F ::= --V
         case DEC_OP:
-            lex();
+            if (lex() == UNKNOWN)
+                return;
+
             V();
             break;
 
@@ -523,7 +565,8 @@ void V()
 {
     printf("Enter <var_start>\n");
 
-    lex();
+    if (lex() == UNKNOWN)
+        return;
 
     printf("Exit <var_start>\n");
 } /* End of function V */
@@ -577,7 +620,8 @@ void Ipd()
 {
     printf("Enter <int_pd_helper>\n");
 
-    lex();
+    if (lex() == UNKNOWN)
+        return;
 
     printf("Exit <int_pd_helper>\n");
 } /* End of function Ipd */
@@ -590,7 +634,8 @@ void L()
 {
     printf("Enter <float>\n");
 
-    lex();
+    if (lex() == UNKNOWN)
+        return;
 
     printf("Exit <float>\n");
 } /* End of function L */
