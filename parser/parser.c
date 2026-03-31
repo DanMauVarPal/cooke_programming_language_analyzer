@@ -12,6 +12,7 @@ C Version       : TODO
 */
 
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "parser.h"
 #include "front.h"
@@ -723,4 +724,6 @@ static void error()
         default:
 			printf("UNKNOWN\n");
     }
+
+    exit(1);
 }

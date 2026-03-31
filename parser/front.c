@@ -13,6 +13,7 @@ C Version       : TODO
 
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <ctype.h>
 
 #include "front.h"
@@ -41,22 +42,20 @@ int main(int argc, char *argv[])
     /* Open the input data file and process its contents */
     if (argv[1] == NULL) {
         printf("ERROR - file wasn't provided\n");
-        return 2;
+        exit(2);
     } else if ((in_fp = fopen(argv[1], "r")) == NULL) {
         printf("ERROR - cannot open %s \n", argv[1]);
         return 3;
     } else {
         printf("Cooke Analyzer :: R11998328\n\n");
         getChar();
-        do {
-            if (lex() == UNKNOWN)
-                return 1;
+        if (lex() == UNKNOWN)
+            exit(1);
 
-            P();
-        } while (nextToken != EOF);
+        P();
     }
 
-    return 0;
+    exit(0);
 }
 
 /*****************************************************/
