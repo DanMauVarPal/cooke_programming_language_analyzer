@@ -18,7 +18,7 @@
 /* Global Variable */
 int nextToken;
 char lexeme [100];
-int lineCount = 0;
+int lineCount = 1;
 
 /* Local Variables */
 static int charClass;
@@ -46,9 +46,7 @@ int main(int argc, char *argv[])
         printf("Cooke Analyzer :: R11998328\n\n");
         getChar();
         do {
-            lex();
-
-            if (nextToken == UNKNOWN)
+            if (lex() == UNKNOWN)
                 return 1;
 
             P();
@@ -454,8 +452,8 @@ int lex() {
             break;
 		case UNKNOWN:
         default:
-			printf("Error encounter on line %d: The next lexeme was %s and the next token was UNKNOWN\n", lineCount);
+			printf("Error encounter on line %d: The next lexeme was %s and the next token was UNKNOWN\n", lineCount, lexeme);
             return 1;
     }
-    return 0;
+    return nextToken;
 } /* End of function lex */

@@ -27,4 +27,5 @@ void D();
 
 extern int nextToken;
 extern char lexeme [100];
+extern int lineCount;
 #endif
