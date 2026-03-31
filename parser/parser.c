@@ -25,12 +25,12 @@ static void error();
  */
 void P()
 {
-    printf("Enter <prog>\n");
+    // printf("Enter <prog>\n");
 
     /* Parse the statement */
     S();
 
-    printf("Exit <prog>\n");
+    // printf("Exit <prog>\n");
 } /* End of function P */
 
 /* S
@@ -39,7 +39,7 @@ void P()
  */
 void S()
 {
-    printf("Enter <stmt>\n");
+    // printf("Enter <stmt>\n");
 
     switch (nextToken) {
         // S ::= V := E Slr
@@ -157,7 +157,7 @@ void S()
 
     Slr();
 
-    printf("Exit <stmt>\n");
+    // printf("Exit <stmt>\n");
 } /* End of function S */
 
 /* Spd
@@ -166,7 +166,7 @@ void S()
  */
 void Spd()
 {
-    printf("Enter <stmt_pd_helper_else>\n");
+    // printf("Enter <stmt_pd_helper_else>\n");
 
     if (nextToken == KEY_ELSE) { // Consumes KEY_ELSE
         lex();
@@ -180,7 +180,7 @@ void Spd()
         }
     }
 
-    printf("Exit <stmt_pd_helper_else>\n");
+    // printf("Exit <stmt_pd_helper_else>\n");
 } /* End of function Spd */
 
 /* Slr
@@ -189,7 +189,7 @@ void Spd()
  */
 void Slr()
 {
-    printf("Enter <stmt_lr_helper>\n");
+    // printf("Enter <stmt_lr_helper>\n");
 
 
     if (nextToken == SEMICOLON) { // Consumes SEMICOLON
@@ -199,7 +199,7 @@ void Slr()
         Slr();
     }
 
-    printf("Exit <stmt_lr_helper>\n");
+    // printf("Exit <stmt_lr_helper>\n");
 } /* End of function Slr */
 
 /* M (Elif)
@@ -208,7 +208,7 @@ void Slr()
  * */
 void M()
 {
-    printf("Enter <more_elif>\n");
+    // printf("Enter <more_elif>\n");
 
     /* As long as the next token is "elif", get
     the next token, parse the next "or" and check : */
@@ -235,7 +235,7 @@ void M()
         }
     }
 
-    printf("Exit <more_elif>\n");
+    // printf("Exit <more_elif>\n");
 } /* End of function M */
 
 /* C (Or)
@@ -244,7 +244,7 @@ void M()
  * */
 void C()
 {
-    printf("Enter <comp_or>\n");
+    // printf("Enter <comp_or>\n");
 
     /* Parse the first "and" */
     A();
@@ -252,7 +252,7 @@ void C()
     /* Enter helper function */
     Clr();
 
-    printf("Exit <comp_or>\n");
+    // printf("Exit <comp_or>\n");
 } /* End of function C */
 
 /* Clr (Or Left-Recursion Helper)
@@ -261,7 +261,7 @@ void C()
  * */
 void Clr()
 {
-    printf("Enter <comp_or_lr_helper>\n");
+    // printf("Enter <comp_or_lr_helper>\n");
 
     /* As long as the next token is "or", get
     the next token, parse the next relation and enter "or" helper */
@@ -275,7 +275,7 @@ void Clr()
         Clr();
     }
 
-    printf("Exit <comp_or_lr_helper>\n");
+    // printf("Exit <comp_or_lr_helper>\n");
 } /* End of function Clr */
 
 /* A (And)
@@ -284,7 +284,7 @@ void Clr()
  * */
 void A()
 {
-    printf("Enter <and_comp>\n");
+    // printf("Enter <and_comp>\n");
 
     /* Parse the first relation */
     R();
@@ -292,7 +292,7 @@ void A()
     /* Enter helper function */
     Alr();
 
-    printf("Exit <and_comp>\n");
+    // printf("Exit <and_comp>\n");
 } /* End of function A */
 
 /* Alr (And Left-Recursion Helper)
@@ -301,7 +301,7 @@ void A()
  * */
 void Alr()
 {
-    printf("Enter <and_comp_lr_helper>\n");
+    // printf("Enter <and_comp_lr_helper>\n");
 
     /* As long as the next token is "and", get
     the next token, parse the next relation and enter "and" helper */
@@ -315,7 +315,7 @@ void Alr()
         Alr();
     }
 
-    printf("Exit <and_comp_lr_helper>\n");
+    // printf("Exit <and_comp_lr_helper>\n");
 } /* End of function Alr */
 
 /* R (Relation)
@@ -324,7 +324,7 @@ void Alr()
  * */
 void R()
 {
-    printf("Enter <relation>\n");
+    // printf("Enter <relation>\n");
 
     /* As long as the next token is "not", get
     the next token and parse the next relation */
@@ -343,7 +343,7 @@ void R()
         Rpd();
     }
 
-    printf("Exit <relation>\n");
+    // printf("Exit <relation>\n");
 } /* End of function R */
 
 /* Rpd (Relation Pairwise-Disjointness Helper)
@@ -352,7 +352,7 @@ void R()
  * */
 void Rpd()
 {
-    printf("Enter <relation_pd_helper>\n");
+    // printf("Enter <relation_pd_helper>\n");
 
     /* As long as the next token is <, >, ==, <>, <= or >=, get
     the next token and parse the next expression */
@@ -373,7 +373,7 @@ void Rpd()
         return;
     }
 
-    printf("Exit <relation_pd_helper>\n");
+    // printf("Exit <relation_pd_helper>\n");
 } /* End of function Rpd */
 
 /* E (Expression)
@@ -382,7 +382,7 @@ void Rpd()
  * */
 void E()
 {
-    printf("Enter <expr>\n");
+    // printf("Enter <expr>\n");
 
     /* Parse the first term */
     T();
@@ -390,7 +390,7 @@ void E()
     /* Enter helper function */
     Elr();
 
-    printf("Exit <expr>\n");
+    // printf("Exit <expr>\n");
 } /* End of function E */
 
 /* Elr (Expression Left-Recursion Helper)
@@ -399,7 +399,7 @@ void E()
  * */
 void Elr()
 {
-    printf("Enter <expr_lr_helper>\n");
+    // printf("Enter <expr_lr_helper>\n");
 
     /* As long as the next token is + or -, get
     the next token, parse the next term and enter the expression helper */
@@ -413,7 +413,7 @@ void Elr()
         Elr();
     }
 
-    printf("Exit <expr_lr_helper>\n");
+    // printf("Exit <expr_lr_helper>\n");
 } /* End of function Elr */
 
 /* T (Term)
@@ -422,7 +422,7 @@ void Elr()
  * */
 void T()
 {
-    printf("Enter <term>\n");
+    // printf("Enter <term>\n");
 
     /* Parse the first factor */
     F();
@@ -430,7 +430,7 @@ void T()
     /* Enter helper function */
     Tlr();
 
-    printf("Exit <term>\n");
+    // printf("Exit <term>\n");
 } /* End of function T */
 
 /* Tlr (Term Left-Recursion Helper)
@@ -439,7 +439,7 @@ void T()
  * */
 void Tlr()
 {
-    printf("Enter <term_lr_helper>\n");
+    // printf("Enter <term_lr_helper>\n");
 
     /* As long as the next token is *, / or %, get
     the next token, parse the next factor and enter term helper */
@@ -455,7 +455,7 @@ void Tlr()
         Tlr();
     }
 
-    printf("Exit <term_lr_helper>\n");
+    // printf("Exit <term_lr_helper>\n");
 } /* End of function Elr */
 
 /* F (Factor)
@@ -464,7 +464,7 @@ void Tlr()
  * */
 void F()
 {
-    printf("Enter <factor>\n");
+    // printf("Enter <factor>\n");
 
     /* As long as the next token is (, int, float, ident, inc_ident or dec_ident, get the
     next token and parse the factor type */
@@ -516,7 +516,7 @@ void F()
             return;
     }
 
-    printf("Exit <factor>\n");
+    // printf("Exit <factor>\n");
 } /* End of function F */
 
 /* V
@@ -525,11 +525,11 @@ void F()
  * */
 void V()
 {
-    printf("Enter <var_start>\n");
+    // printf("Enter <var_start>\n");
 
     lex();
 
-    printf("Exit <var_start>\n");
+    // printf("Exit <var_start>\n");
 } /* End of function V */
 
 /* X
@@ -538,11 +538,11 @@ void V()
  * */
 void X()
 {
-    printf("Enter <x_var>\n");
+    // printf("Enter <x_var>\n");
 
 
 
-    printf("Exit <x_var>\n");
+    // printf("Exit <x_var>\n");
 } /* End of function X */
 
 /* H
@@ -551,11 +551,11 @@ void X()
  * */
 void H()
 {
-    printf("Enter <h_alpha>\n");
+    // printf("Enter <h_alpha>\n");
 
 
 
-    printf("Exit <h_alpha>\n");
+    // printf("Exit <h_alpha>\n");
 } /* End of function H */
 
 /* I
@@ -564,13 +564,13 @@ void H()
  * */
 void I()
 {
-    printf("Enter <int>\n");
+    // printf("Enter <int>\n");
 
     D();
 
     Ipd();
 
-    printf("Exit <int>\n");
+    // printf("Exit <int>\n");
 } /* End of function I */
 
 /* Ipd
@@ -579,11 +579,11 @@ void I()
  * */
 void Ipd()
 {
-    printf("Enter <int_pd_helper>\n");
+    // printf("Enter <int_pd_helper>\n");
 
     lex();
 
-    printf("Exit <int_pd_helper>\n");
+    // printf("Exit <int_pd_helper>\n");
 } /* End of function Ipd */
 
 /* L
@@ -592,11 +592,11 @@ void Ipd()
  * */
 void L()
 {
-    printf("Enter <float>\n");
+    // printf("Enter <float>\n");
 
     lex();
 
-    printf("Exit <float>\n");
+    // printf("Exit <float>\n");
 } /* End of function L */
 
 /* D
@@ -605,11 +605,11 @@ void L()
  * */
 void D()
 {
-    printf("Enter <digit>\n");
+    // printf("Enter <digit>\n");
 
 
 
-    printf("Exit <digit>\n");
+    // printf("Exit <digit>\n");
 } /* End of function D */
 
 static void error() 
