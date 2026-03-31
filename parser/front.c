@@ -1,13 +1,16 @@
-/**
- * This the example lexical analyzer code in pages 173 - 177 of the
- * textbook,
- *
- * Sebesta, R. W. (2012). Concepts of Programming Languages. 
- * Pearson, 10th edition.
- *
- */
+/*
+===================================================================================
+Title           : parser.c
+Description     : a lexical analyzer system for the cooke programming language
+Author          : var28790 (R#11998328)
+Date            : 04/03/2026
+Version         : 1.0
+Usage           : Compile and run this program using the GNU C compiler
+Notes           : This program has no requirements
+C Version       : TODO
+===================================================================================
+*/
 
-/* front.c - a lexical analyzer system for simple arithmetic expressions */
 #include <string.h>
 #include <stdio.h>
 #include <ctype.h>
