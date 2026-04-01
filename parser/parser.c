@@ -189,7 +189,7 @@ void Slr()
 
     if (nextToken == SEMICOLON) { // Consumes SEMICOLON
         lex();
-        if (nextToken == EOF || nextToken == KEY_IF || nextToken == KEY_ELIF || nextToken == KEY_ELSE)
+        if (nextToken == EOF)
             error();
         S();
 

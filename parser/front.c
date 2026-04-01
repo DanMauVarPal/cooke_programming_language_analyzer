@@ -39,21 +39,23 @@ static void getNonBlank();
 /* main driver */
 int main(int argc, char *argv[])
 {
+    printf("Cooke Analyzer :: R11998328\n\n");
+    
     /* Open the input data file and process its contents */
     if (argv[1] == NULL) {
         printf("ERROR - file wasn't provided\n");
         exit(2);
     } else if ((in_fp = fopen(argv[1], "r")) == NULL) {
-        printf("ERROR - cannot open %s \n", argv[1]);
+        printf("ERROR - file %s does not exist \n", argv[1]);
         return 3;
     } else {
-        printf("Cooke Analyzer :: R11998328\n\n");
         getChar();
         
         lex();
         P();
     }
 
+    printf("Syntax Validated");
     exit(0);
 }
 
