@@ -17,13 +17,6 @@ void Elr();
 void T();
 void Tlr();
 void F();
-void V();
-void X();
-void H();
-void I();
-void Ipd();
-void L();
-void D();
 
 extern int nextToken;
 extern char lexeme [100];
