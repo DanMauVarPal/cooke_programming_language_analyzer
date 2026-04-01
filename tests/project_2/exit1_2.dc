@@ -1,0 +1,33 @@
+ifsum := 12.00;
+counter := 1;
+printnum := ifsum / counter;
+
+cout << printnum;
+
+print           := 1;
+read            := 2;
+whilevar:= 3;
+forvar  := 4;
+
+cin >> readnum;
+cin >> otherval;
+
+if ifsum <> counter:
+    counter := counter + 1
+    ifsum := ifsum + readnum
+
+else:
+    if forvar > whilevar:
+                cout << forvar
+    elif whilevar == print:
+                cout << whilevar
+    elif print <> read:
+                cout << print
+    elif read <= whilevar:
+                cout << read
+    elif print >= read:
+                cout << forvar + whilevar
+    elif forvar < whilevar and whilevar <> print or print < read:
+                cout << whilevar * 3
+    else:
+                cout << print + otherval

@@ -1,0 +1,32 @@
+ifsum := 12.00;
+
+for counter in 1/1..(4*10-13+12)%30:
+        cout << counter;
+
+        print           := 123648 % counter;
+        read            := (++print * 4 /2 +1 -(43 +21 /2)) %20;
+        whilevar:= (--print* 4/ 2+ 1-(43+ 21 / (3*2))% 20;
+        forvar  := 4;
+
+        cin >> readnum;
+        cin >> otherval;
+
+        if not ifsum == counter:
+                counter := counter + 1;
+                ifsum := ifsum + readnum
+
+        else:
+                if forvar *3+ 6/ 2 > 10+whilevar*3:
+                        cout << forvar
+                elif whilevar == print:
+                        cout << whilevar
+                elif print <> read:
+                        cout << print
+                elif read <= whilevar:
+                        cout << read
+                elif print >= read:
+                        cout << forvar + whilevar
+                elif forvar < whilevar and whilevar <> print or print < read:
+                        cout << whilevar * 3
+                else:
+                        cout << print + otherval

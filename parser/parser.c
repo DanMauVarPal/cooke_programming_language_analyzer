@@ -147,7 +147,6 @@ void S()
         
         default:
             error();
-            return;
     }
 
     Slr();
@@ -171,7 +170,6 @@ void Spd()
         }
         else {
             error();
-            return;
         }
     }
 
@@ -228,7 +226,6 @@ void M()
         }
         else {
             error();
-            return;
         }
     }
 
@@ -502,7 +499,6 @@ void F()
         // Invalid factor RHS
         default:
             error();
-            return;
     }
 
     // printf("Exit <factor>\n");
