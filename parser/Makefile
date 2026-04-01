@@ -1,4 +1,4 @@
-NAME=cooke_analyzer
+NAME=cooke_parser
 
 all: $(NAME)
 

@@ -347,7 +347,7 @@ int lex() {
             lexeme[1] = 'O';
             lexeme[2] = 'F';
             lexeme[3] = 0;
-			exit(0);
+			return nextToken;
     } /* End of switch */
 
     // UNKNOWN token error exit

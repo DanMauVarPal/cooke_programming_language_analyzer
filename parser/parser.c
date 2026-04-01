@@ -188,7 +188,8 @@ void Slr()
 
 
     if (nextToken == SEMICOLON) { // Consumes SEMICOLON
-        lex();
+        if (lex() == EOF)
+            error();
         S();
 
         Slr();
@@ -613,6 +614,9 @@ static void error()
             break;
         case FLOAT_LITERAL:
             printf("FLOAT_LITERAL\n");
+            break;
+        case EOF:
+            printf("EOF\n");
             break;
 		case UNKNOWN:
         default:
