@@ -49,9 +49,8 @@ int main(int argc, char *argv[])
     } else {
         printf("Cooke Analyzer :: R11998328\n\n");
         getChar();
-        if (lex() == UNKNOWN)
-            exit(1);
-
+        
+        lex();
         P();
     }
 
@@ -348,7 +347,7 @@ int lex() {
             lexeme[1] = 'O';
             lexeme[2] = 'F';
             lexeme[3] = 0;
-			return nextToken;
+			exit(0);
     } /* End of switch */
 
     // UNKNOWN token error exit
