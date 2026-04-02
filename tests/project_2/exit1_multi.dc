@@ -1,0 +1,53 @@
+firstvar:=1236548654;
+secondvar:=685453245863541;
+thirdvar:=0.10;
+input_var:=0.1;
+_statevar:=$.1;
+
+cin>>input_var-1;
+
+iamaverylongvariablenametoensureyourparsercanparselongnameslikethisone:=(((firstvar++secondvar)-2)*5)*4;
+testvar:=iamaverylongvariablenametoensureyourparsercanparselongnameslikethisone/2;
+
+if input_var*3+6/2>10+ ++firstvar*3:
+    thirdvar:=(firstvar*4/2+1-(43+(112-21/(input_var/2))))%25;
+    othervar:=thirdvar+secondvar-firstvar
+else:
+    thirdvar:=secondvar*4/2+1-(43+(112-21/(input_var/2))))*2;
+    othervar:=thirdvar+secondvar-firstvar;
+
+if thirdvar > othervar :
+    if firstvar <= thirdvar :
+        if firstvar < secondvar :
+            if secondvar >= thirdvar :
+                _statevar := 99
+            else :
+                _statevar := 98
+        else :
+            if secondvar <> thirdvar :
+                _statevar := 101
+            elif secondvar == thirdvar and secondvar > input_var :
+                _statevar := 102
+            elif secondvar == thirdvar or secondvar == input_var :
+                _statevar := 103
+            else :
+                _statevar := 100;
+                if not secondvar - input_var < secondvar : _statevar := 987654321
+    else :
+        if firstvar < secondvar :
+            if secondvar > thirdvar :
+                _statevar := 92
+            else :
+                _statevar := 91
+        else :
+            if secondvar == thirdvar :
+                _statevar := 90
+            else :
+                _statevar := 89;
+    cout << _statevar + 1
+else :
+    if thirdvar < othervar :
+        ++_statevar
+    else :
+        --_statevar
+    cout << _statevar + 1

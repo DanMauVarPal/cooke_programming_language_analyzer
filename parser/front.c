@@ -1,15 +1,19 @@
-/**
- * This the example lexical analyzer code in pages 173 - 177 of the
- * textbook,
- *
- * Sebesta, R. W. (2012). Concepts of Programming Languages. 
- * Pearson, 10th edition.
- *
- */
+/*
+===================================================================================
+Title           : parser.c
+Description     : a lexical analyzer system for the cooke programming language
+Author          : var28790 (R#11998328)
+Date            : 04/03/2026
+Version         : 1.0
+Usage           : Compile and run this program using the GNU C compiler
+Notes           : This program has no requirements
+C Version       : TODO
+===================================================================================
+*/
 
-/* front.c - a lexical analyzer system for simple arithmetic expressions */
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <ctype.h>
 
 #include "front.h"
@@ -17,10 +21,11 @@
 
 /* Global Variable */
 int nextToken;
+char lexeme [100];
+int lineCount = 1;
 
 /* Local Variables */
 static int charClass;
-static char lexeme [100];
 static char nextChar;
 static int lexLen;
 static FILE *in_fp;
@@ -34,19 +39,24 @@ static void getNonBlank();
 /* main driver */
 int main(int argc, char *argv[])
 {
+    printf("Cooke Analyzer :: R11998328\n\n");
+    
     /* Open the input data file and process its contents */
-    if ((in_fp = fopen(argv[1], "r")) == NULL)
-        printf("ERROR - cannot open %s \n", argv[1]);
-    else {
-        printf("Cooke Analyzer :: R11998328\n\n");
+    if (argv[1] == NULL) {
+        printf("ERROR - file wasn't provided\n");
+        exit(2);
+    } else if ((in_fp = fopen(argv[1], "r")) == NULL) {
+        printf("ERROR - file %s does not exist \n", argv[1]);
+        return 3;
+    } else {
         getChar();
-        do {
-            lex();
-            // expr();
-        } while (nextToken != EOF);
+        
+        lex();
+        P();
     }
 
-    return 0;
+    printf("Syntax Validated\n");
+    exit(0);
 }
 
 /*****************************************************/
@@ -62,8 +72,8 @@ static int lookup(char ch) {
 				addChar();
                 getChar();
                 nextToken = ASSIGNMENT_OP;
-            }
-	        else nextToken = COLON;
+            } else
+                nextToken = COLON;
             break;
 
 		// Relational and shift operator tokens
@@ -180,6 +190,7 @@ static int lookup(char ch) {
             addChar();
             getChar();
             nextToken = UNKNOWN;
+            error();
             break;
     }
     return nextToken;
@@ -192,7 +203,10 @@ static void addChar() {
         lexeme[lexLen++] = nextChar;
         lexeme[lexLen] = 0;
     }
-    else printf("Error - lexeme is too long \n");
+    else {
+        printf("Error - lexeme is too long \n");
+        exit(1);
+    }
 }
 
 /*****************************************************/
@@ -206,7 +220,7 @@ static void getChar() {
         else if (isdigit(nextChar))
             charClass = DIGIT;
 
-		else if (nextChar == '.')
+        else if (nextChar == '.')
             charClass = DOT;
 
         else charClass = UNKNOWN;
@@ -218,7 +232,12 @@ static void getChar() {
 /* getNonBlank - a function to call getChar until it returns a non-whitespace 
  * character */
 static void getNonBlank() {
-    while (isspace(nextChar)) getChar();
+    while (isspace(nextChar)) {
+        if (nextChar == '\n')
+            lineCount += 1;
+
+        getChar();
+    }
 }
 
 /*****************************************************/
@@ -241,31 +260,31 @@ int lex() {
             if (strcmp(lexeme, "or") == 0)
                 nextToken = BOOLEAN_OR;
 
-			else if (strcmp(lexeme, "and") == 0)
+            else if (strcmp(lexeme, "and") == 0)
                 nextToken = BOOLEAN_AND;
 
-			else if (strcmp(lexeme, "not") == 0)
+            else if (strcmp(lexeme, "not") == 0)
                 nextToken = BOOLEAN_NOT;
 
-			else if (strcmp(lexeme, "if") == 0)
+            else if (strcmp(lexeme, "if") == 0)
                 nextToken = KEY_IF;
 
-			else if (strcmp(lexeme, "elif") == 0)
+            else if (strcmp(lexeme, "elif") == 0)
                 nextToken = KEY_ELIF;
 
-			else if (strcmp(lexeme, "else") == 0)
+            else if (strcmp(lexeme, "else") == 0)
                 nextToken = KEY_ELSE;
 
-			else if (strcmp(lexeme, "for") == 0)
+            else if (strcmp(lexeme, "for") == 0)
                 nextToken = KEY_FOR;
 
-			else if (strcmp(lexeme, "in") == 0)
+            else if (strcmp(lexeme, "in") == 0)
                 nextToken = KEY_IN;
 
-			else if (strcmp(lexeme, "cin") == 0)
+            else if (strcmp(lexeme, "cin") == 0)
                 nextToken = KEY_CIN;
 
-			else if (strcmp(lexeme, "cout") == 0)
+            else if (strcmp(lexeme, "cout") == 0)
                 nextToken = KEY_COUT;
 			
             // Identifier token
@@ -280,8 +299,7 @@ int lex() {
                 addChar();
                 getChar();
 				nextToken = RANGE_OP;
-            }
-            else {
+            } else {
                 while (charClass == DIGIT) {
                     addChar();
                     getChar();
@@ -332,12 +350,17 @@ int lex() {
             lexeme[1] = 'O';
             lexeme[2] = 'F';
             lexeme[3] = 0;
-			return nextToken;
+            break;
     } /* End of switch */
 
-    printf("%s\t", lexeme);
+    printf("Line %d\t%s\t\t", lineCount, lexeme);
+    printToken();
 
-	// Token type check and print
+    return nextToken;
+} /* End of function lex */
+
+void printToken() {
+    // Token type check and print
     switch (nextToken) {
         case ASSIGNMENT_OP:
             printf("ASSIGNMENT_OP\n");
@@ -441,9 +464,11 @@ int lex() {
         case FLOAT_LITERAL:
             printf("FLOAT_LITERAL\n");
             break;
+        case EOF:
+            printf("EOF\n");
+            break;
 		case UNKNOWN:
         default:
 			printf("UNKNOWN\n");
     }
-    return nextToken;
-} /* End of function lex */
+}
