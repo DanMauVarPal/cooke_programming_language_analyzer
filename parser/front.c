@@ -190,8 +190,7 @@ static int lookup(char ch) {
             addChar();
             getChar();
             nextToken = UNKNOWN;
-            printf("Error encounter on line %d: The next lexeme was %s and the next token was UNKNOWN\n", lineCount, lexeme);
-            exit(1);
+            error();
             break;
     }
     return nextToken;

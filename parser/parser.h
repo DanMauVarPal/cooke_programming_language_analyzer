@@ -17,6 +17,7 @@ void Elr();
 void T();
 void Tlr();
 void F();
+void error();
 
 extern int nextToken;
 extern char lexeme [100];
