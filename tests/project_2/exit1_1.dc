@@ -1,6 +1,14 @@
-f := 15;
-i := 11.00;
+printnum := ifsum / counter;
+cout << printnum;
 
-cin >> n;
 
-if n != i : cout << f
+ifsum := 1023.123;
+counter := 1;
+
+cin >> readnum;
+
+if ifsum >= counter:
+        ++counter;
+        ifsum := ifsum + readnum;
+        printnum := ifsum / counter;
+        cout << printaverage;
