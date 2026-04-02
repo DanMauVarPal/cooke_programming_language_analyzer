@@ -52,7 +52,6 @@ void S()
             }
             else {
                 error();
-                return;
             }
             
             break;
@@ -66,7 +65,6 @@ void S()
             }
             else {
                 error();
-                return;
             }
 
             break;
@@ -80,7 +78,6 @@ void S()
             }
             else {
                 error();
-                return;
             }
 
             break;
@@ -111,16 +108,13 @@ void S()
                     }
                     else {
                         error();
-                        return;
                     }
                 } {
                     error();
-                    return;
                 }
             }
             else {
                 error();
-                return;
             }
 
             break;
@@ -140,7 +134,6 @@ void S()
             }
             else {
                 error();
-                return;
             }
 
             break;
@@ -364,7 +357,6 @@ void Rpd()
     // Invalid Relation Pairwise-Disjointness Helper
     else {
         error();
-        return;
     }
 
     // printf("Exit <relation_pd_helper>\n");
@@ -476,7 +468,6 @@ void F()
                 lex();
             else {
                 error();
-                return;
             }
 
             break;
