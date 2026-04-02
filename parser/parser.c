@@ -30,6 +30,9 @@ void P()
     /* Parse the statement */
     S();
 
+    if (nextToken != EOF)
+        error();
+
     printf("Exit <prog>\n");
 } /* End of function P */
 
@@ -183,8 +186,8 @@ void Slr()
         if (nextToken == EOF)
             error();
         S();
-
-        Slr();
+    } else {
+        
     }
 
     printf("Exit <s;s>\n");

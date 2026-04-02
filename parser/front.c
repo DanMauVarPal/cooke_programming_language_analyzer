@@ -354,7 +354,7 @@ int lex() {
             break;
     } /* End of switch */
 
-    printf("%s\t\t", lexeme);
+    printf("Line %d\t%s\t\t", lineCount, lexeme);
     printToken();
 
     return nextToken;
