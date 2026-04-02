@@ -45,5 +45,6 @@
 
 
 int lex();
+void printToken();
 
 #endif

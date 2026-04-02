@@ -55,7 +55,7 @@ int main(int argc, char *argv[])
         P();
     }
 
-    printf("Syntax Validated");
+    printf("Syntax Validated\n");
     exit(0);
 }
 
@@ -354,5 +354,122 @@ int lex() {
             break;
     } /* End of switch */
 
+    printf("%s\t\t", lexeme);
+    printToken();
+
     return nextToken;
 } /* End of function lex */
+
+void printToken() {
+    // Token type check and print
+    switch (nextToken) {
+        case ASSIGNMENT_OP:
+            printf("ASSIGNMENT_OP\n");
+			break;
+        case BOOLEAN_OR:
+            printf("BOOLEAN_OR\n");
+            break;
+        case BOOLEAN_AND:
+            printf("BOOLEAN_AND\n");
+            break;
+        case BOOLEAN_NOT:
+            printf("BOOLEAN_NOT\n");
+            break;
+        case LESSER_OP:
+            printf("LESSER_OP\n");
+            break;
+        case GREATER_OP:
+            printf("GREATER_OP\n");
+            break;
+        case EQUAL_OP:
+            printf("EQUAL_OP\n");
+            break;
+        case NEQUAL_OP:
+            printf("NEQUAL_OP\n");
+            break;
+        case LEQUAL_OP:
+            printf("LEQUAL_OP\n");
+            break;
+        case GEQUAL_OP:
+            printf("GEQUAL_OP\n");
+            break;
+        case SEMICOLON:
+            printf("SEMICOLON\n");
+            break;
+        case COLON:
+            printf("COLON\n");
+            break;
+        case LEFT_PAREN:
+            printf("LEFT_PAREN\n");
+            break;
+        case RIGHT_PAREN:
+			printf("RIGHT_PAREN\n");
+            break;
+		case KEY_IF:
+            printf("KEY_IF\n");
+			break;
+		case KEY_ELIF:
+            printf("KEY_ELIF\n");
+			break;
+		case KEY_ELSE:
+            printf("KEY_ELSE\n");
+			break;
+		case KEY_FOR:
+            printf("KEY_FOR\n");
+			break;
+		case KEY_IN:
+            printf("KEY_IN\n");
+			break;
+		case KEY_CIN:
+            printf("KEY_CIN\n");
+			break;
+		case KEY_COUT:
+            printf("KEY_COUT\n");
+			break;
+		case SHIFT_R_OP:
+            printf("SHIFT_R_OP\n");
+			break;
+		case SHIFT_L_OP:
+            printf("SHIFT_L_OP\n");
+			break;
+		case RANGE_OP:
+            printf("RANGE_OP\n");
+			break;
+		case ADD_OP:
+            printf("ADD_OP\n");
+			break;
+		case SUB_OP:
+            printf("SUB_OP\n");
+			break;
+		case MULT_OP:
+            printf("MULT_OP\n");
+			break;
+		case DIV_OP:
+            printf("DIV_OP\n");
+			break;
+		case MOD_OP:
+            printf("MOD_OP\n");
+			break;
+		case INC_OP:
+            printf("INC_OP\n");
+			break;
+		case DEC_OP:
+            printf("DEC_OP\n");
+			break;
+        case IDENT:
+            printf("IDENT\n");
+            break;
+        case INT_LITERAL:
+            printf("INT_LITERAL\n");
+            break;
+        case FLOAT_LITERAL:
+            printf("FLOAT_LITERAL\n");
+            break;
+        case EOF:
+            printf("EOF\n");
+            break;
+		case UNKNOWN:
+        default:
+			printf("UNKNOWN\n");
+    }
+}
