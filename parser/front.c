@@ -7,7 +7,7 @@ Date            : 04/03/2026
 Version         : 1.0
 Usage           : Compile and run this program using the GNU C compiler
 Notes           : This program has no requirements
-C Version       : TODO
+C Version       : C 11+
 ===================================================================================
 */
 
@@ -353,8 +353,8 @@ int lex() {
             break;
     } /* End of switch */
 
-    printf("Line %d\t%s\t\t", lineCount, lexeme);
-    printToken();
+    // printf("Line %d\t%s\t\t", lineCount, lexeme);
+    // printToken();
 
     return nextToken;
 } /* End of function lex */
