@@ -4,7 +4,7 @@ Title           : parser.c
 Description     : a lexical analyzer system for the cooke programming language
 Author          : var28790 (R#11998328)
 Date            : 04/03/2026
-Version         : 1.0
+Version         : 2.0
 Usage           : Compile and run this program using the GNU C compiler
 Notes           : This program has no requirements
 C Version       : C 11+
@@ -39,7 +39,7 @@ static void getNonBlank();
 /* main driver */
 int main(int argc, char *argv[])
 {
-    printf("Cooke Analyzer :: R11998328\n\n");
+    printf("Cooke Parser :: R11998328\n\n");
     
     /* Open the input data file and process its contents */
     if (argv[1] == NULL) {
@@ -47,7 +47,7 @@ int main(int argc, char *argv[])
         exit(2);
     } else if ((in_fp = fopen(argv[1], "r")) == NULL) {
         printf("ERROR - file %s does not exist \n", argv[1]);
-        return 3;
+        exit(3);
     } else {
         getChar();
         
